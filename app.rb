@@ -21,8 +21,13 @@ class App
         @io.puts("todo added, ID #{@todos.length}")
         @todos.each_with_index { |todo, index| @io.puts "#{todo}, ID: #{index + 1}"} 
       when 'done'
-        todo_id = answer.split.last
-        @io.puts("no todos in list")
+        todo_id = answer.split.last.to_i
+        @todos.delete_at(todo_id - 1)
+        if @todos.empty?
+          @io.puts "no todos in list"
+        else
+          @todos.each_with_index { |todo, index| @io.puts "#{todo}, ID: #{index + 1}"} 
+        end
       else
         return
       end
