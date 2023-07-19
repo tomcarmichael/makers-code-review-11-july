@@ -125,4 +125,20 @@ RSpec.describe App do
     app = App.new(io)
     app.run  
   end
+
+  it "Prompts the user again if they enter an unrecognised command" do
+    io = double(:io)
+    main_prompt = "What would you like to do?\n
+      To add a todo: 'add [Todo name]'\n
+      To mark a todo complete: 'done [Todo ID]'\n
+      To see all todos: 'show todos'\n
+      To exit: 'exit'"
+    expect(io).to receive(:puts).with(main_prompt).ordered
+    expect(io).to receive(:gets).and_return('sleep').ordered
+    expect(io).to receive(:puts).with(main_prompt).ordered
+    expect(io).to receive(:gets).and_return('exit').ordered
+
+    app = App.new(io)
+    app.run  
+  end
 end

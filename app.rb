@@ -32,7 +32,7 @@ class App
         else
           print_todos
         end
-      else
+      when 'exit'
         return
       end
     end
