@@ -20,6 +20,24 @@ RSpec.describe App do
     app.run  
   end
 
+  it "Allows the user to add a todo with multiple words" do
+    io = double(:io)
+    main_prompt = "What would you like to do?\n
+      To add a todo: 'add [Todo name]'\n
+      To mark a todo complete: 'done [Todo ID]'\n
+      To see all todos: 'show todos'\n
+      To exit: 'exit'"
+    expect(io).to receive(:puts).with(main_prompt).ordered
+    expect(io).to receive(:gets).and_return('add brush the dog').ordered
+    expect(io).to receive(:puts).with('todo added, ID 1').ordered
+    expect(io).to receive(:puts).with('brush the dog, ID: 1').ordered
+    expect(io).to receive(:puts).with(main_prompt).ordered
+    expect(io).to receive(:gets).and_return('exit').ordered
+
+    app = App.new(io)
+    app.run  
+  end
+
   it "Allows the user to add a different todo, displays the todo and allows the user to exit" do
     io = double(:io)
     main_prompt = "What would you like to do?\n

@@ -20,7 +20,7 @@ class App
       answer = @io.gets
       case answer.split.first
       when 'add'
-        todo_name = answer.split.last
+        todo_name = answer.split[1..-1].join(" ")
         @todos << todo_name
         @io.puts("todo added, ID #{@todos.length}")
         print_todos
