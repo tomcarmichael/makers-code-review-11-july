@@ -25,8 +25,15 @@ RSpec.describe ToDoList do
     todo_list.add('go to sleep')
     todo_list.delete(2)
     expect(todo_list.todos).to eq(['wake up'])
-
   end
 
+  it "can delete a task from the middle of the todos array" do
+    todo_list.add('wake up')
+    todo_list.add('go to sleep')
+    todo_list.add('walk the dog')
+    todo_list.add('tell a joke')
+    todo_list.delete(3)
+    expect(todo_list.todos).to eq(['wake up', 'go to sleep', 'tell a joke'])
+  end
 
 end
