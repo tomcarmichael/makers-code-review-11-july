@@ -1,9 +1,11 @@
 require_relative('../app')
 
 RSpec.describe App do
+  let(:io) { double(:io) }
+  let(:app) { App.new(io) }
+
 
   it "Allows the user to add a todo, displays the todo and allows the user to exit" do
-    io = double(:io)
     main_prompt = "What would you like to do?\n
       To add a todo: 'add [Todo name]'\n
       To mark a todo complete: 'done [Todo ID]'\n
@@ -15,13 +17,10 @@ RSpec.describe App do
     expect(io).to receive(:puts).with('wakeup, ID: 1').ordered
     expect(io).to receive(:puts).with(main_prompt).ordered
     expect(io).to receive(:gets).and_return('exit').ordered
-
-    app = App.new(io)
     app.run  
   end
 
   it "Allows the user to add a todo with multiple words" do
-    io = double(:io)
     main_prompt = "What would you like to do?\n
       To add a todo: 'add [Todo name]'\n
       To mark a todo complete: 'done [Todo ID]'\n
@@ -33,13 +32,10 @@ RSpec.describe App do
     expect(io).to receive(:puts).with('brush the dog, ID: 1').ordered
     expect(io).to receive(:puts).with(main_prompt).ordered
     expect(io).to receive(:gets).and_return('exit').ordered
-
-    app = App.new(io)
     app.run  
   end
 
   it "Allows the user to add a different todo, displays the todo and allows the user to exit" do
-    io = double(:io)
     main_prompt = "What would you like to do?\n
       To add a todo: 'add [Todo name]'\n
       To mark a todo complete: 'done [Todo ID]'\n
@@ -51,13 +47,10 @@ RSpec.describe App do
     expect(io).to receive(:puts).with('sleep, ID: 1').ordered
     expect(io).to receive(:puts).with(main_prompt).ordered
     expect(io).to receive(:gets).and_return('exit').ordered
-
-    app = App.new(io)
     app.run  
   end
 
   it "Allows the user to add multiple todos, displays them and allows the user to exit" do
-    io = double(:io)
     main_prompt = "What would you like to do?\n
       To add a todo: 'add [Todo name]'\n
       To mark a todo complete: 'done [Todo ID]'\n
@@ -74,13 +67,10 @@ RSpec.describe App do
     expect(io).to receive(:puts).with("wakeup, ID: 2").ordered
     expect(io).to receive(:puts).with(main_prompt).ordered
     expect(io).to receive(:gets).and_return('exit').ordered
-
-    app = App.new(io)
     app.run  
   end
 
   it "Allows the user to mark a todo complete" do
-    io = double(:io)
     main_prompt = "What would you like to do?\n
       To add a todo: 'add [Todo name]'\n
       To mark a todo complete: 'done [Todo ID]'\n
@@ -95,13 +85,10 @@ RSpec.describe App do
     expect(io).to receive(:puts).with('no todos in list').ordered
     expect(io).to receive(:puts).with(main_prompt).ordered
     expect(io).to receive(:gets).and_return('exit').ordered
-
-    app = App.new(io)
     app.run  
   end
 
   it "Allows the user to add multiple todos and mark one of them done" do
-    io = double(:io)
     main_prompt = "What would you like to do?\n
       To add a todo: 'add [Todo name]'\n
       To mark a todo complete: 'done [Todo ID]'\n
@@ -121,13 +108,10 @@ RSpec.describe App do
     expect(io).to receive(:puts).with('wakeup, ID: 1').ordered
     expect(io).to receive(:puts).with(main_prompt).ordered
     expect(io).to receive(:gets).and_return('exit').ordered
-
-    app = App.new(io)
     app.run  
   end
 
   it "Prompts the user again if they enter an unrecognised command" do
-    io = double(:io)
     main_prompt = "What would you like to do?\n
       To add a todo: 'add [Todo name]'\n
       To mark a todo complete: 'done [Todo ID]'\n
@@ -137,8 +121,6 @@ RSpec.describe App do
     expect(io).to receive(:gets).and_return('sleep').ordered
     expect(io).to receive(:puts).with(main_prompt).ordered
     expect(io).to receive(:gets).and_return('exit').ordered
-
-    app = App.new(io)
     app.run  
   end
 end
