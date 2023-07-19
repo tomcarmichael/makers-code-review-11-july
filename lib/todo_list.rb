@@ -9,4 +9,8 @@ class ToDoList
     @todos << task
     return "todo added, ID #{@todos.length}"
   end
+
+  def delete(id)
+    @todos.delete_at(id - 1)
+  end
 end
