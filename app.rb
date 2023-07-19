@@ -10,6 +10,10 @@ class App
       To mark a todo complete: 'done [Todo ID]'\n
       To see all todos: 'show todos'\n
       To exit: 'exit'"
+
+    def print_todos
+      @todos.each_with_index { |todo, index| @io.puts "#{todo}, ID: #{index + 1}"} 
+    end
       
     while true
       @io.puts(main_prompt)
@@ -19,14 +23,14 @@ class App
         todo_name = answer.split.last
         @todos << todo_name
         @io.puts("todo added, ID #{@todos.length}")
-        @todos.each_with_index { |todo, index| @io.puts "#{todo}, ID: #{index + 1}"} 
+        print_todos
       when 'done'
         todo_id = answer.split.last.to_i
         @todos.delete_at(todo_id - 1)
         if @todos.empty?
           @io.puts "no todos in list"
         else
-          @todos.each_with_index { |todo, index| @io.puts "#{todo}, ID: #{index + 1}"} 
+          print_todos
         end
       else
         return
