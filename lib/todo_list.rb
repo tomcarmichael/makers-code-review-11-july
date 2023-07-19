@@ -4,4 +4,8 @@ class ToDoList
   def initialize
     @todos = []
   end
+
+  def add(task)
+    @todos << task
+  end
 end
