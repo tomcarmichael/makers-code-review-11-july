@@ -7,5 +7,6 @@ class ToDoList
 
   def add(task)
     @todos << task
+    return "todo added, ID #{@todos.length}"
   end
 end

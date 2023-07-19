@@ -10,14 +10,14 @@ RSpec.describe ToDoList do
 
   it "can add a task to the todos array" do
     expect(todo_list.todos).to eq([]) 
-    todo_list.add('wake up')
+    expect(todo_list.add('wake up')).to eq('todo added, ID 1')
     expect(todo_list.todos).to eq(['wake up']) 
   end
 
-  it "can add multipl tasks to the todos array" do
+  it "can add multiple tasks to the todos array" do
     expect(todo_list.todos).to eq([]) 
     todo_list.add('wake up')
-    todo_list.add('go to sleep up')
-    expect(todo_list.todos).to eq(['wake up', 'go to sleep up']) 
+    expect(todo_list.add('go to sleep')).to eq('todo added, ID 2')
+    expect(todo_list.todos).to eq(['wake up', 'go to sleep'])
   end
 end
