@@ -1,6 +1,7 @@
 class App
   def initialize(io)
     @io = io
+    @todos = []
   end
 
   def run
@@ -16,8 +17,9 @@ class App
       case answer.split.first
       when 'add'
         todo_name = answer.split.last
-        @io.puts("todo added, ID 1")
-        @io.puts("#{todo_name}, ID: 1")
+        @todos << todo_name
+        @io.puts("todo added, ID #{@todos.length}")
+        @todos.each_with_index { |todo, index| @io.puts "#{todo}, ID: #{index + 1}"} 
       when 'done'
         todo_id = answer.split.last
         @io.puts("no todos in list")
