@@ -1,8 +1,10 @@
 require_relative('../app')
+require('todo_list')
+
 
 RSpec.describe App do
   let(:io) { double(:io) }
-  let(:app) { App.new(io) }
+  let(:app) { App.new(io, ToDoList) }
 
 
   it "Allows the user to add a todo, displays the todo and allows the user to exit" do

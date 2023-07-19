@@ -1,7 +1,9 @@
+require_relative('./lib/todo_list.rb')
+
 class App
-  def initialize(io)
+  def initialize(io, todo_list_class)
     @io = io
-    @todos = []
+    @todo_list = todo_list_class.new
   end
 
   def run
@@ -12,7 +14,7 @@ class App
       To exit: 'exit'"
 
     def print_todos
-      @todos.each_with_index { |todo, index| @io.puts "#{todo}, ID: #{index + 1}"} 
+      @todo_list.todos.each_with_index { |todo, index| @io.puts "#{todo}, ID: #{index + 1}"} 
     end
       
     while true
@@ -21,13 +23,12 @@ class App
       case answer.split.first
       when 'add'
         todo_name = answer.split[1..-1].join(" ")
-        @todos << todo_name
-        @io.puts("todo added, ID #{@todos.length}")
+        @io.puts(@todo_list.add(todo_name))
         print_todos
       when 'done'
         todo_id = answer.split.last.to_i
-        @todos.delete_at(todo_id - 1)
-        if @todos.empty?
+        @todo_list.delete(todo_id)
+        if @todo_list.todos.empty?
           @io.puts "no todos in list"
         else
           print_todos
